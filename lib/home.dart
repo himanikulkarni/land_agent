@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:land_agent/create_ppty.dart';
 import 'package:land_agent/liked.dart';
+import 'package:land_agent/notifications.dart';
+import 'package:land_agent/profile.dart';
+import 'package:land_agent/search.dart';
 
 void main() {
   runApp(const home());
@@ -50,7 +54,13 @@ class Home extends StatelessWidget {
               width: 170.h,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const notifications()),
+                );
+              },
               child: Container(
                 width: 40.w,
                 height: 35.h,
@@ -207,7 +217,12 @@ Widget NavBar(BuildContext context) {
             width: 10.w,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const home()),
+              );
+            },
             child: const Icon(
               Icons.home,
               color: Colors.grey,
@@ -218,7 +233,12 @@ Widget NavBar(BuildContext context) {
             width: 27.w,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const search()),
+              );
+            },
             child: const Icon(
               Icons.search,
               color: Colors.grey,
@@ -228,15 +248,23 @@ Widget NavBar(BuildContext context) {
           SizedBox(
             width: 32.w,
           ),
-          Container(
-            width: 40.w,
-            height: 40.h,
-            decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 223, 134, 0),
-                borderRadius: BorderRadius.circular(5.0)),
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const create_ppty()),
+              );
+            },
+            child: Container(
+              width: 40.w,
+              height: 40.h,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 223, 134, 0),
+                  borderRadius: BorderRadius.circular(5.0)),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
           ),
           SizedBox(
@@ -259,7 +287,12 @@ Widget NavBar(BuildContext context) {
             width: 30.w,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const profile()),
+              );
+            },
             child: const Icon(
               Icons.person,
               color: Colors.grey,

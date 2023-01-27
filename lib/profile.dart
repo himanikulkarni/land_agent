@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:land_agent/home.dart';
-import 'package:land_agent/profile.dart';
+import 'package:land_agent/liked.dart';
 import 'package:land_agent/search.dart';
+import 'package:land_agent/settings.dart';
 
 void main() {
-  runApp(const liked());
+  runApp(const profile());
 }
 
-class liked extends StatelessWidget {
-  const liked({super.key});
+class profile extends StatelessWidget {
+  const profile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class liked extends StatelessWidget {
               Theme.of(context).textTheme,
             ),
           ),
-          home: const Liked(),
+          home: const Profile(),
           debugShowCheckedModeBanner: false,
         );
       }),
@@ -30,8 +31,8 @@ class liked extends StatelessWidget {
   }
 }
 
-class Liked extends StatelessWidget {
-  const Liked({super.key});
+class Profile extends StatelessWidget {
+  const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +40,26 @@ class Liked extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0.0,
+        elevation: 1.0,
         title: Row(
           children: [
             Text(
-              'Liked Properties',
+              'Your Profile',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 30.sp,
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              width: 70.w,
+              width: 120.h,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const settings()),
+                );
+              },
               child: Container(
                 width: 40.w,
                 height: 35.h,
@@ -61,7 +67,7 @@ class Liked extends StatelessWidget {
                     color: const Color.fromARGB(255, 254, 229, 191),
                     borderRadius: BorderRadius.circular(7.0)),
                 child: const Icon(
-                  Icons.notifications_outlined,
+                  Icons.settings_outlined,
                   color: Color.fromARGB(255, 223, 134, 0),
                 ),
               ),
@@ -69,37 +75,108 @@ class Liked extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: SafeArea(
+      body: Column(
+        children: [
+          SizedBox(
+            height: 20.h,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 20.w,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'PVR Realtor',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    'Chennai',
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 100.w,
+              ),
+              Container(
+                width: 90.w,
+                height: 80.h,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 254, 229, 191),
+                    borderRadius: BorderRadius.circular(7.0)),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 20.w,
+              ),
+              Text(
+                'About me',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 20.w,
+              ),
+              Text(
+                'Write something about yourself\nor your expectations',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30.h,
+          ),
+          Container(
+            width: 320.w,
+            height: 100.h,
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 86, 25, 255),
+                borderRadius: BorderRadius.circular(7.0)),
             child: Column(
               children: [
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
-                    SizedBox(
-                      width: 20.h,
-                    ),
-                    Container(
-                      width: 50.w,
-                      height: 45.h,
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(7.0)),
-                    ),
-                    SizedBox(
-                      width: 20.h,
+                    Text(
+                      '         0',
+                      style: TextStyle(color: Colors.white, fontSize: 30.sp),
                     ),
                     Text(
-                      'Gokul Resolutions \nPvt. Ltd.',
-                      style: TextStyle(
-                          fontSize: 20.sp,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600),
-                    )
+                      '         0',
+                      style: TextStyle(color: Colors.white, fontSize: 30.sp),
+                    ),
+                    Text(
+                      '         0',
+                      style: TextStyle(color: Colors.white, fontSize: 30.sp),
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -107,96 +184,64 @@ class Liked extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(
-                      width: 20.h,
-                    ),
-                    const Icon(
-                      Icons.location_pin,
-                      color: Color.fromARGB(255, 121, 120, 120),
-                    ),
-                    const Text('   Annanagar, Chennai')
-                  ],
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 20.h,
-                    ),
-                    const Text('Area: 5000 sqft')
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 20.h,
+                    Text(
+                      '   Properties',
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
                     ),
                     Text(
-                      'Property is in Annanagar vacant\nland total extent 5000sqft price\n@10cr',
-                      style: TextStyle(fontSize: 20.sp),
+                      '  Following',
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                    ),
+                    Text(
+                      '  Followers',
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
                     ),
                   ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 30.h,
-                    ),
-                    Container(
-                      width: 300.w,
-                      height: 250.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7.0)),
-                      child: Image.asset(
-                        'assets/home.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 30.h,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        width: 60.w,
-                        height: 35.h,
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 254, 229, 191),
-                            borderRadius: BorderRadius.circular(18.r)),
-                        child: const Icon(
-                          Icons.favorite,
-                          color: Color.fromARGB(255, 223, 134, 0),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Text(
-                  '- End of results -',
-                  style: TextStyle(color: Colors.grey, fontSize: 20.sp),
                 ),
               ],
             ),
           ),
-        ),
+          SizedBox(
+            height: 30.h,
+          ),
+          Container(
+            width: 320.w,
+            height: 100.h,
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 250, 183, 81),
+                borderRadius: BorderRadius.circular(7.0)),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '      Approved(0)',
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                    ),
+                    Text(
+                      '      Pending(0)',
+                      style: TextStyle(color: Colors.black, fontSize: 20.sp),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '                      Rejected(0)',
+                      style: TextStyle(color: Colors.black, fontSize: 20.sp),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: NavBar(context),
     );
