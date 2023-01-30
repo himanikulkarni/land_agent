@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:land_agent/home.dart';
 import 'package:land_agent/profile.dart';
 import 'package:land_agent/search.dart';
+import 'package:land_agent/Login.dart';
 
 void main() {
   runApp(const liked());
@@ -42,6 +43,21 @@ class Liked extends StatelessWidget {
         elevation: 0.0,
         title: Row(
           children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const login()),
+                );
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              width: 10.h,
+            ),
             Text(
               'Liked Properties',
               style: TextStyle(
@@ -50,7 +66,7 @@ class Liked extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              width: 70.w,
+              width: 30.w,
             ),
             GestureDetector(
               onTap: () {},

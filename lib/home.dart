@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:land_agent/Login.dart';
 import 'package:land_agent/create_ppty.dart';
 import 'package:land_agent/liked.dart';
 import 'package:land_agent/notifications.dart';
@@ -43,6 +44,21 @@ class Home extends StatelessWidget {
         elevation: 0.0,
         title: Row(
           children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const login()),
+                );
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              width: 10.h,
+            ),
             Text(
               'Home',
               style: TextStyle(
@@ -51,7 +67,7 @@ class Home extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              width: 170.h,
+              width: 135.h,
             ),
             GestureDetector(
               onTap: () {

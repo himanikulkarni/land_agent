@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:land_agent/home.dart';
 import 'package:land_agent/ppty_img.dart';
 
 void main() {
@@ -40,6 +41,21 @@ class Create_ppty extends StatelessWidget {
         elevation: 1.0,
         title: Row(
           children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const home()),
+                );
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              width: 10.h,
+            ),
             Text(
               'Create Property',
               style: TextStyle(
@@ -48,7 +64,7 @@ class Create_ppty extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              width: 50.w,
+              width: 12.w,
             ),
             Container(
               width: 80.w,
