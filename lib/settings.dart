@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:land_agent/password.dart';
 import 'package:land_agent/profile.dart';
 
 void main() {
@@ -70,33 +71,43 @@ class Settings extends StatelessWidget {
           SizedBox(
             height: 25.h,
           ),
-          Row(
-            children: [
-              SizedBox(
-                width: 20.h,
-              ),
-              const Icon(
-                Icons.verified_user_outlined,
-                color: Colors.orange,
-              ),
-              SizedBox(
-                width: 5.w,
-              ),
-              Text(
-                'Password',
-                style: TextStyle(
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const password()),
+              );
+            },
+            child: Container(
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 20.h,
+                  ),
+                  const Icon(
+                    Icons.verified_user_outlined,
+                    color: Colors.orange,
+                  ),
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  Text(
+                    'Password',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    width: 155.w,
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
                     color: Colors.black,
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.w500),
+                  )
+                ],
               ),
-              SizedBox(
-                width: 155.w,
-              ),
-              const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-              )
-            ],
+            ),
           ),
           const Divider(),
           SizedBox(
