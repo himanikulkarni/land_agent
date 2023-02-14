@@ -43,6 +43,17 @@ class Profile extends StatelessWidget {
         elevation: 1.0,
         title: Row(
           children: [
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const home()),
+                  );
+                },
+                child: const Icon(Icons.arrow_back, color: Colors.black)),
+            SizedBox(
+              width: 10.w,
+            ),
             Text(
               'Your Profile',
               style: TextStyle(
@@ -51,7 +62,7 @@ class Profile extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              width: 120.h,
+              width: 80.h,
             ),
             GestureDetector(
               onTap: () {

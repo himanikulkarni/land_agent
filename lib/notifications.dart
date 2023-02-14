@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:land_agent/home.dart';
 
 void main() {
   runApp(const notifications());
@@ -39,6 +40,17 @@ class Notifications extends StatelessWidget {
         elevation: 1.0,
         title: Row(
           children: [
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const home()),
+                  );
+                },
+                child: const Icon(Icons.arrow_back, color: Colors.black)),
+            SizedBox(
+              width: 10.w,
+            ),
             Text(
               'Notifications',
               style: TextStyle(

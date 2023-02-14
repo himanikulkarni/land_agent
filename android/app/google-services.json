@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "953672057970",
+    "project_id": "land-agent-d3eb3",
+    "storage_bucket": "land-agent-d3eb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953672057970:android:d43ad0955c3306a36e6eeb",
+        "android_client_info": {
+          "package_name": "com.example.land_agent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953672057970-puriku2at9flel5tn64f06fkg3o8iuqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG7H3E5AHyjnD7drZAi7qfGuyAOmiO-k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953672057970-puriku2at9flel5tn64f06fkg3o8iuqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

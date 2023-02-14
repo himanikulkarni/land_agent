@@ -4,11 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:land_agent/home.dart';
 import 'package:land_agent/profile.dart';
 import 'package:land_agent/search.dart';
-import 'package:land_agent/Login.dart';
-
-void main() {
-  runApp(const liked());
-}
 
 class liked extends StatelessWidget {
   const liked({super.key});
@@ -47,7 +42,7 @@ class Liked extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const login()),
+                  MaterialPageRoute(builder: (context) => const home()),
                 );
               },
               child: const Icon(

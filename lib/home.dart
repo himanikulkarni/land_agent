@@ -8,10 +8,6 @@ import 'package:land_agent/notifications.dart';
 import 'package:land_agent/profile.dart';
 import 'package:land_agent/search.dart';
 
-void main() {
-  runApp(const home());
-}
-
 class home extends StatelessWidget {
   const home({super.key});
 
@@ -48,7 +44,7 @@ class Home extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const login()),
+                  MaterialPageRoute(builder: (context) => const Login()),
                 );
               },
               child: const Icon(

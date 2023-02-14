@@ -4,10 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:land_agent/home.dart';
 import 'package:land_agent/ppty_img.dart';
 
-void main() {
-  runApp(const create_ppty());
-}
-
 class create_ppty extends StatelessWidget {
   const create_ppty({super.key});
 
