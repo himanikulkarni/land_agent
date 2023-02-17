@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
                       Text(
                         'Email',
                         style: TextStyle(color: Colors.black, fontSize: 20.sp),
-                      )
+                      ),
                     ],
                   ),
                 ),

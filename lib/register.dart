@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'dart:convert';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  TextEditingController brokername = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController mobile = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +90,7 @@ class Register extends StatelessWidget {
                       width: 200.w,
                       height: 40.h,
                       child: TextField(
+                        controller: brokername,
                         cursorColor: Colors.grey,
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
@@ -130,7 +144,8 @@ class Register extends StatelessWidget {
                     SizedBox(
                       width: 10.w,
                     ),
-                    SizedBox(width: 250.w, height: 50.h, child: Realtor()),
+                    SizedBox(
+                        width: 250.w, height: 50.h, child: const Realtor()),
                   ],
                 ),
               ),
@@ -164,7 +179,8 @@ class Register extends StatelessWidget {
                     SizedBox(
                       width: 10.w,
                     ),
-                    SizedBox(width: 250.w, height: 50.h, child: District()),
+                    SizedBox(
+                        width: 250.w, height: 50.h, child: const District()),
                   ],
                 ),
               ),
@@ -202,6 +218,7 @@ class Register extends StatelessWidget {
                       width: 200.w,
                       height: 40.h,
                       child: TextField(
+                        controller: mobile,
                         keyboardType: TextInputType.number,
                         cursorColor: Colors.grey,
                         style: GoogleFonts.poppins(
@@ -260,6 +277,7 @@ class Register extends StatelessWidget {
                       width: 200.w,
                       height: 40.h,
                       child: TextField(
+                        controller: email,
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: Colors.grey,
                         style: GoogleFonts.poppins(
@@ -318,6 +336,7 @@ class Register extends StatelessWidget {
                       width: 200.w,
                       height: 40.h,
                       child: TextField(
+                        controller: password,
                         obscureText: true,
                         cursorColor: Colors.grey,
                         style: GoogleFonts.poppins(
@@ -345,32 +364,37 @@ class Register extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              Container(
-                width: 310.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 252, 133, 59),
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 12.h,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 120.w,
-                        ),
-                        Text(
-                          'Register',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  ],
+              InkWell(
+                onTap: () {
+                  registerUser();
+                },
+                child: Container(
+                  width: 310.w,
+                  height: 50.h,
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 252, 133, 59),
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 12.h,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 120.w,
+                          ),
+                          Text(
+                            'Register',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -399,7 +423,7 @@ class Register extends StatelessWidget {
                     width: 45.w,
                   ),
                   Text(
-                    'ALready registered?',
+                    'Already registered?',
                     style: TextStyle(
                         color: const Color.fromARGB(255, 104, 104, 104),
                         fontSize: 16.sp,
@@ -424,9 +448,29 @@ class Register extends StatelessWidget {
       ),
     );
   }
+
+  void registerUser() async {
+    var url = "https://land-agent.in/app_request/external_access/Register";
+    var data = {
+      "brokername": brokername.text,
+      "email": email.text,
+      "mobile": mobile.text,
+      "password": password.text
+    };
+    var bodyy = json.encode(data);
+    var urlParse = Uri.parse(url);
+    Response response = await http.post(
+      urlParse,
+      body: bodyy,
+    );
+    var dataa = jsonDecode(response.body);
+    print(dataa);
+  }
 }
 
 class Realtor extends StatefulWidget {
+  const Realtor({super.key});
+
   @override
   _RealtorState createState() => _RealtorState();
 }
@@ -445,7 +489,7 @@ class _RealtorState extends State<Realtor> {
             decoration: const InputDecoration(
                 border: InputBorder.none,
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white))),
+                    borderSide: BorderSide(color: Colors.transparent))),
             value: selectedItem,
             items: items
                 .map((item) => DropdownMenuItem<String>(
@@ -464,6 +508,8 @@ class _RealtorState extends State<Realtor> {
 }
 
 class District extends StatefulWidget {
+  const District({super.key});
+
   @override
   _DistrictState createState() => _DistrictState();
 }
@@ -493,7 +539,7 @@ class _DistrictState extends State<District> {
             decoration: const InputDecoration(
                 border: InputBorder.none,
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white))),
+                    borderSide: BorderSide(color: Colors.transparent))),
             value: selectedItem,
             items: items
                 .map((item) => DropdownMenuItem<String>(
