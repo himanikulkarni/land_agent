@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:land_agent/Login.dart';
 import 'package:land_agent/create_ppty.dart';
 import 'package:land_agent/liked.dart';
 import 'package:land_agent/notifications.dart';
 import 'package:land_agent/profile.dart';
+import 'package:land_agent/register.dart';
 import 'package:land_agent/search.dart';
 
 class home extends StatelessWidget {
@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Login()),
+                  MaterialPageRoute(builder: (context) => const Register()),
                 );
               },
               child: const Icon(

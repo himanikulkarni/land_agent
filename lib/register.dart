@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
-import 'dart:convert';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -13,89 +9,93 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController brokername = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController mobile = TextEditingController();
-  TextEditingController password = TextEditingController();
+  double dW = 0.0;
+  double dH = 0.0;
+  double tS = 0.0;
 
   @override
   Widget build(BuildContext context) {
+    dW = MediaQuery.of(context).size.width;
+    dH = MediaQuery.of(context).size.height;
+    tS = MediaQuery.of(context).textScaleFactor;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 200.h,
-                width: double.infinity,
-                child: Image.asset(
-                  'assets/building.png',
-                  fit: BoxFit.fill,
-                ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(
+              height: dW * 0.7,
+              child: Image.asset(
+                'assets/building.png',
+                fit: BoxFit.fill,
               ),
-              SizedBox(
-                height: 25.h,
-              ),
-              Text(
-                'Create an Account',
-                style: TextStyle(
+            ),
+            SizedBox(height: dW * 0.08),
+            Container(
+              child: Text(
+                'Create an account',
+                style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 30.sp,
+                    fontSize: tS * 30,
                     fontWeight: FontWeight.w600),
               ),
-              SizedBox(
-                height: 10.h,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: dW * 0.05, right: dW * 0.05),
+              child: Center(
+                child: Text(
+                  'An Unique Portal only for Land Brokers to connect with one another.',
+                  style: GoogleFonts.poppins(
+                      color: Colors.grey,
+                      fontSize: tS * 12,
+                      fontWeight: FontWeight.normal),
+                ),
               ),
-              Text(
-                'An unique portal only for land brokers to connect with\none another.',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.inter(
-                    color: Colors.grey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Container(
-                width: 310.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 185, 184, 184)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Container(
-                      width: 40.w,
-                      height: 35.h,
+            ),
+            SizedBox(height: dW * 0.06),
+            Container(
+              width: dW * 0.9,
+              height: dH * 0.08,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 185, 184, 184)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: dH * 0.01, top: dH * 0.01, bottom: dH * 0.01),
+                    child: Container(
+                      width: dH * 0.06,
+                      height: dH * 0.06,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 245, 198, 137),
                           borderRadius: BorderRadius.circular(7.0)),
                       child: const Icon(
-                        Icons.person_outline,
+                        Icons.mail_outline,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(
-                      width: 10.w,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: dH * 0.01,
+                      right: dH * 0.01,
+                      bottom: dH * 0.0001,
+                      top: dH * 0.005,
                     ),
-                    SizedBox(
-                      width: 200.w,
-                      height: 40.h,
+                    child: SizedBox(
+                      height: dH * 0.03,
+                      width: dH * 0.2,
                       child: TextField(
-                        controller: brokername,
+                        keyboardType: TextInputType.emailAddress,
                         cursorColor: Colors.grey,
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                               color: Colors.grey,
-                              fontSize: 19.sp,
+                              fontSize: tS * 18,
                               fontWeight: FontWeight.w600),
                         ),
                         decoration: InputDecoration(
@@ -105,163 +105,33 @@ class _RegisterState extends State<Register> {
                           labelStyle: GoogleFonts.poppins(
                             textStyle: TextStyle(
                                 color: Colors.grey,
-                                fontSize: 19.sp,
+                                fontSize: tS * 18,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                width: 310.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 185, 184, 184)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Container(
-                      width: 40.w,
-                      height: 35.h,
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 198, 137),
-                          borderRadius: BorderRadius.circular(7.0)),
-                      child: const Icon(
-                        Icons.person_outline,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    SizedBox(
-                        width: 250.w, height: 50.h, child: const Realtor()),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                width: 310.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 185, 184, 184)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Container(
-                      width: 40.w,
-                      height: 35.h,
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 198, 137),
-                          borderRadius: BorderRadius.circular(7.0)),
-                      child: const Icon(
-                        Icons.location_pin,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    SizedBox(
-                        width: 250.w, height: 50.h, child: const District()),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                width: 310.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 185, 184, 184)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Container(
-                      width: 40.w,
-                      height: 35.h,
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 198, 137),
-                          borderRadius: BorderRadius.circular(7.0)),
-                      child: const Icon(
-                        Icons.call_outlined,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    SizedBox(
-                      width: 200.w,
-                      height: 40.h,
-                      child: TextField(
-                        controller: mobile,
-                        keyboardType: TextInputType.number,
-                        cursorColor: Colors.grey,
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 19.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          border: InputBorder.none,
-                          labelText: 'Mobile',
-                          labelStyle: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 19.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                width: 310.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 185, 184, 184)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Container(
-                      width: 40.w,
-                      height: 35.h,
+            ),
+            SizedBox(height: dW * 0.06),
+            Container(
+              width: dW * 0.9,
+              height: dH * 0.08,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 185, 184, 184)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: dH * 0.01, top: dH * 0.01, bottom: dH * 0.01),
+                    child: Container(
+                      width: dH * 0.06,
+                      height: dH * 0.06,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 245, 198, 137),
                           borderRadius: BorderRadius.circular(7.0)),
@@ -270,201 +140,26 @@ class _RegisterState extends State<Register> {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    SizedBox(
-                      width: 200.w,
-                      height: 40.h,
-                      child: TextField(
-                        controller: email,
-                        keyboardType: TextInputType.emailAddress,
-                        cursorColor: Colors.grey,
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 19.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          border: InputBorder.none,
-                          labelText: 'Email',
-                          labelStyle: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 19.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                width: 310.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 185, 184, 184)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Container(
-                      width: 40.w,
-                      height: 35.h,
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 198, 137),
-                          borderRadius: BorderRadius.circular(7.0)),
-                      child: const Icon(
-                        Icons.lock_outline,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    SizedBox(
-                      width: 200.w,
-                      height: 40.h,
-                      child: TextField(
-                        controller: password,
-                        obscureText: true,
-                        cursorColor: Colors.grey,
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 19.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        decoration: InputDecoration(
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          border: InputBorder.none,
-                          labelText: 'Password',
-                          labelStyle: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 19.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              InkWell(
-                onTap: () {
-                  registerUser();
-                },
-                child: Container(
-                  width: 310.w,
-                  height: 50.h,
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 252, 133, 59),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 120.w,
-                          ),
-                          Text(
-                            'Register',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                    ],
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Text(
-                'By registering you agree to the broker',
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w400),
-              ),
-              Text(
-                'Terms of use & conditions',
-                style: TextStyle(
-                    color: const Color.fromARGB(255, 236, 162, 65),
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: 25.h,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 45.w,
-                  ),
-                  Text(
-                    'Already registered?',
-                    style: TextStyle(
-                        color: const Color.fromARGB(255, 104, 104, 104),
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  SizedBox(
-                    width: 25.w,
-                  ),
-                  Text(
-                    'Sign-in here',
-                    style: TextStyle(
-                        color: const Color.fromARGB(255, 236, 162, 65),
-                        fontSize: 16.sp,
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.w400),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: dH * 0.01,
+                      right: dH * 0.01,
+                      bottom: dH * 0.0001,
+                      top: dH * 0.005,
+                    ),
+                    child: SizedBox(
+                        height: dH * 0.07,
+                        width: dH * 0.4,
+                        child: const Realtor()),
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  void registerUser() async {
-    var url = "https://land-agent.in/app_request/external_access/Register";
-    var data = {
-      "brokername": brokername.text,
-      "email": email.text,
-      "mobile": mobile.text,
-      "password": password.text
-    };
-    var bodyy = json.encode(data);
-    var urlParse = Uri.parse(url);
-    Response response = await http.post(
-      urlParse,
-      body: bodyy,
-    );
-    var dataa = jsonDecode(response.body);
-    print(dataa);
   }
 }
 
@@ -479,80 +174,40 @@ class _RealtorState extends State<Realtor> {
   List<String> items = ['Realtors', 'Builder'];
   String? selectedItem = 'Realtors';
 
+  double dW = 0.0;
+  double dH = 0.0;
+  double tS = 0.0;
+
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SizedBox(
-          width: 290.w,
-          height: 50.h,
-          child: DropdownButtonFormField<String>(
-            isExpanded: true,
-            decoration: const InputDecoration(
-                border: InputBorder.none,
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent))),
-            value: selectedItem,
-            items: items
-                .map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(item,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19.sp,
-                              fontWeight: FontWeight.w600)),
-                    ))
-                .toList(),
-            onChanged: (item) => setState(() => selectedItem = item),
-          ),
+  Widget build(BuildContext context) {
+    dW = MediaQuery.of(context).size.width;
+    dH = MediaQuery.of(context).size.height;
+    tS = MediaQuery.of(context).textScaleFactor;
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(color: Colors.white),
+        height: dH * 0.06,
+        width: dH * 0.4,
+        child: DropdownButtonFormField<String>(
+          isExpanded: true,
+          decoration: const InputDecoration(
+              border: InputBorder.none,
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent))),
+          value: selectedItem,
+          items: items
+              .map((item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(item,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: tS * 18,
+                            fontWeight: FontWeight.w600)),
+                  ))
+              .toList(),
+          onChanged: (item) => setState(() => selectedItem = item),
         ),
-      );
-}
-
-class District extends StatefulWidget {
-  const District({super.key});
-
-  @override
-  _DistrictState createState() => _DistrictState();
-}
-
-class _DistrictState extends State<District> {
-  List<String> items = [
-    'Select your district',
-    'Ariyalur',
-    'Chengalpattu',
-    'Chennai',
-    'Coimbatore',
-    'Cuddalore',
-    'Dharmapuri',
-    'Dindigul',
-    'Erode',
-    'Kallakurichi'
-  ];
-  String? selectedItem = 'Select your district';
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SizedBox(
-          width: 290.w,
-          height: 50.h,
-          child: DropdownButtonFormField<String>(
-            isExpanded: true,
-            decoration: const InputDecoration(
-                border: InputBorder.none,
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent))),
-            value: selectedItem,
-            items: items
-                .map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(item,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19.sp,
-                              fontWeight: FontWeight.w600)),
-                    ))
-                .toList(),
-            onChanged: (item) => setState(() => selectedItem = item),
-          ),
-        ),
-      );
+      ),
+    );
+  }
 }
