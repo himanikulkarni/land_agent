@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:land_agent/register.dart';
+import 'package:land_agent/screens/register.dart';
 import 'package:land_agent/widget/custom_textfields.dart';
 import 'package:http/http.dart' as http;
 
