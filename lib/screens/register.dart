@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:land_agent/models/district_list_model.dart';
 import 'package:land_agent/widget/custom_textfields.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,8 +32,6 @@ class _RegisterState extends State<Register> {
     map['pass'] = passController.text;
     map['broker_name'] = broker_nameController.text;
     map['mobile'] = mobileController.text;
-    map['register_type'] = "Builder";
-    map['district'] = "Coimbatore";
 
     final url =
         Uri.parse('https://land-agent.in/app_request/external_access/Register');
@@ -174,9 +173,10 @@ class _RegisterState extends State<Register> {
                     width: dW * 0.025,
                   ),
                   SizedBox(
-                      width: dW * 0.7,
-                      height: dH * 0.08,
-                      child: const District()),
+                    width: dW * 0.7,
+                    height: dH * 0.08,
+                    child: const District(),
+                  ),
                 ],
               ),
             ),
@@ -331,11 +331,31 @@ class Realtor extends StatefulWidget {
 
 class _RealtorState extends State<Realtor> {
   List<String> items = ['Realtors', 'Builder'];
-  String? selectedItem = 'Realtors';
+  String? selectedItem1 = 'Realtors';
 
   double dW = 0.0;
   double dH = 0.0;
   double tS = 0.0;
+
+  Future<void> _sendData() async {
+    var map = <String, dynamic>{};
+
+    map['register_type'] = selectedItem1;
+
+    final url =
+        Uri.parse('https://land-agent.in/app_request/external_access/Register');
+    final response = await http.post(
+      url,
+      body: map,
+    );
+
+    if (response.statusCode == 200) {
+      final responseBody = response.body;
+      print('Response: $responseBody');
+    } else {
+      print('Error: ${response.statusCode}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -353,7 +373,7 @@ class _RealtorState extends State<Realtor> {
               border: InputBorder.none,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent))),
-          value: selectedItem,
+          value: selectedItem1,
           items: items
               .map((item) => DropdownMenuItem<String>(
                     value: item,
@@ -364,7 +384,7 @@ class _RealtorState extends State<Realtor> {
                             fontWeight: FontWeight.w600)),
                   ))
               .toList(),
-          onChanged: (item) => setState(() => selectedItem = item),
+          onChanged: (item) => setState(() => selectedItem1 = item),
         ),
       ),
     );
@@ -379,24 +399,57 @@ class District extends StatefulWidget {
 }
 
 class _DistrictState extends State<District> {
-  List<String> items = [
-    'Select your district',
-    'Ariyalur',
-    'Chengalpattu',
-    'Chennai',
-    'Coimbtore',
-    'Cuddalore',
-    'Dharmapuri',
-    'Dindigul',
-    'Erode',
-    'Kallakurichi',
-    'Kanchipuram'
-  ];
+  List<String> items = [];
+  String selectedDisctrict = "";
+
+  DistrictListModel? districtListModel;
+
+  Future<http.Response> getDistrictList() async {
+    final response = await http.get(
+      Uri.parse(
+        "https://land-agent.in/app_request/external_access/District-List",
+      ),
+    );
+    districtListModel = districtListModelFromJson(response.body);
+    for (var element in districtListModel!.data) {
+      items.add(element.districtName);
+    }
+    selectedDisctrict = items.first;
+    setState(() {});
+    return response;
+  }
+
   String? selectedItem = 'Select your district';
 
   double dW = 0.0;
   double dH = 0.0;
   double tS = 0.0;
+
+  Future<void> _sendData() async {
+    var map = <String, dynamic>{};
+
+    map['district'] = selectedDisctrict;
+
+    final url =
+        Uri.parse('https://land-agent.in/app_request/external_access/Register');
+    final response = await http.post(
+      url,
+      body: map,
+    );
+
+    if (response.statusCode == 200) {
+      final responseBody = response.body;
+      print('Response: $responseBody');
+    } else {
+      print('Error: ${response.statusCode}');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getDistrictList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -411,10 +464,14 @@ class _DistrictState extends State<District> {
         child: DropdownButtonFormField<String>(
           isExpanded: true,
           decoration: const InputDecoration(
-              border: InputBorder.none,
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent))),
-          value: selectedItem,
+            border: InputBorder.none,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+          value: selectedDisctrict,
           items: items
               .map((item) => DropdownMenuItem<String>(
                     value: item,
@@ -425,7 +482,7 @@ class _DistrictState extends State<District> {
                             fontWeight: FontWeight.w600)),
                   ))
               .toList(),
-          onChanged: (item) => setState(() => selectedItem = item),
+          onChanged: (item) => setState(() => selectedDisctrict = item!),
         ),
       ),
     );
