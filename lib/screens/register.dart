@@ -400,7 +400,9 @@ class District extends StatefulWidget {
 
 class _DistrictState extends State<District> {
   List<String> items = [];
+  List<String> items_append = [];
   String selectedDisctrict = "";
+  String selectedid = "";
 
   DistrictListModel? districtListModel;
 
@@ -411,11 +413,15 @@ class _DistrictState extends State<District> {
       ),
     );
     districtListModel = districtListModelFromJson(response.body);
+
     for (var element in districtListModel!.data) {
-      items.add(element.districtName);
+      items.add(
+        element.districtName,
+      );
     }
     selectedDisctrict = items.first;
     setState(() {});
+
     return response;
   }
 
@@ -428,7 +434,7 @@ class _DistrictState extends State<District> {
   Future<void> _sendData() async {
     var map = <String, dynamic>{};
 
-    map['district'] = selectedDisctrict;
+    map['district'] = selectedid;
 
     final url =
         Uri.parse('https://land-agent.in/app_request/external_access/Register');
