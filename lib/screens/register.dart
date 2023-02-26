@@ -434,7 +434,7 @@ class _DistrictState extends State<District> {
   Future<void> _sendData() async {
     var map = <String, dynamic>{};
 
-    map['district'] = selectedid;
+    map['id'] = selectedid;
 
     final url =
         Uri.parse('https://land-agent.in/app_request/external_access/Register');
